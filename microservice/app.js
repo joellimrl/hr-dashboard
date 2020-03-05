@@ -1,7 +1,13 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const router = require("./router.js");
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => res.send("Hello World!"));
+// parse application/json
+app.use(bodyParser.json());
+app.use("/", router);
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () =>
+  console.log(`HR Dashboard Middleware listening on port ${port}!`)
+);
