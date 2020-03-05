@@ -24,7 +24,9 @@ MongoDB
 
 ## Notes
 
-No test coverage
-No access/refresh tokens
-No registration yet
-No forgot/change password
+- No test coverage
+- No access/refresh tokens
+- No registration yet
+- No forgot/change password
+
+Pushed Private and Public Keys to Github for easier access
