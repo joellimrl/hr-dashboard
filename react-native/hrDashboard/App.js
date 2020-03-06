@@ -1,24 +1,33 @@
 import React, { Component } from "react";
-import LoginScreen from "./screens/Login";
+import { Provider } from "react-redux";
+import createSagaMiddleware from "redux-saga";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { store } from "./store/store";
+import LoginScreen from "./screens/Login";
+import EmployeeList from "./screens/EmployeeList";
+import EmployeeDetails from "./screens/EmployeeDetails";
+import { helloSaga } from "./sagas";
 
-// const instructions = Platform.select({
-//   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
-//   android:
-//     "Double tap R on your keyboard to reload,\n" +
-//     "Shake or press menu button for dev menu"
-// });
 const Stack = createStackNavigator();
 
 export default class App extends Component {
   render() {
     return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <LoginScreen />;
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false
+            }}
+            initialRouteName="login"
+          >
+            <Stack.Screen name="login" component={LoginScreen} />
+            <Stack.Screen name="employeeList" component={EmployeeList} />
+            <Stack.Screen name="employeeDetails" component={EmployeeDetails} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     );
   }
 }

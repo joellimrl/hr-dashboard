@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import {
-  // Platform,
   StyleSheet,
   TextInput,
   View,
@@ -8,20 +9,23 @@ import {
   Text
 } from "react-native";
 
-// const instructions = Platform.select({
-//   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
-//   android:
-//     "Double tap R on your keyboard to reload,\n" +
-//     "Shake or press menu button for dev menu"
-// });
-
-export default class Login extends Component {
+class Login extends Component {
   state = {
-    username: "",
-    password: ""
+    username: "admin",
+    password: "admin"
   };
 
-  onPressLogin = () => {};
+  componentDidUpdate(prevProps) {
+    const { navigation, auth } = this.props;
+    if (auth.success && auth.success !== prevProps.success) {
+      navigation.navigate("employeeList");
+    }
+  }
+
+  onPressLogin = () => {
+    const { login } = this.props;
+    login(this.state);
+  };
 
   render() {
     return (
@@ -44,13 +48,24 @@ export default class Login extends Component {
             onChangeText={text => this.setState({ password: text })}
           />
         </View>
-        <TouchableOpacity style={styles.loginBtn}>
+        {!!this.props.auth.message && (
+          <Text style={styles.errorMessage}>{this.props.auth.message}</Text>
+        )}
+        <TouchableOpacity style={styles.loginBtn} onPress={this.onPressLogin}>
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
+
+Login.navigationOptions = {
+  header: null
+};
+
+Login.propTypes = {
+  navigation: PropTypes.instanceOf(Object).isRequired
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -91,5 +106,26 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "white"
+  },
+  errorMessage: {
+    color: "red"
   }
 });
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    login: body =>
+      dispatch({
+        type: "LOGIN",
+        body
+      })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
