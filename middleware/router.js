@@ -4,10 +4,8 @@ import * as notificationController from "./controllers/notifications.controller"
 import express from "express";
 const router = express.Router();
 
-// Public Key
 router.get("/publicKey", authController.getPublicKeyController);
 
-// Login route
 router.put("/login", authController.putLoginController);
 
 router.get("/employees", employeesController.getEmployeeListController);
@@ -20,7 +18,7 @@ router.get(
 );
 
 router.post(
-  "/notifications/retrieveToken",
+  "/notifications/token",
   notificationController.postNotificationTokenController
 );
 

@@ -7,15 +7,7 @@ import {
   TouchableOpacity,
   Text
 } from "react-native";
-import {
-  Container,
-  Header,
-  Left,
-  Body,
-  Button,
-  Title,
-  Right
-} from "native-base";
+import { Container, Header, Left, Body, Button, Right } from "native-base";
 import { connect } from "react-redux";
 
 class EmployeeList extends Component {
@@ -57,7 +49,7 @@ class EmployeeList extends Component {
         <Header>
           <Left></Left>
           <Body>
-            <Title>List of Employees</Title>
+            <Text style={styles.title}>List of Employees</Text>
           </Body>
           <Right>
             <Button onPress={() => navigation.goBack()} transparent>
@@ -120,6 +112,10 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   logout: {
+    fontSize: 18,
+    color: "white"
+  },
+  title: {
     fontSize: 18,
     color: "white"
   }

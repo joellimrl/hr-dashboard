@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, Text } from "react-native";
-import {
-  Container,
-  Header,
-  Left,
-  Body,
-  Button,
-  Icon,
-  Title
-} from "native-base";
+import { Container, Header, Left, Body, Button, Icon } from "native-base";
 import { connect } from "react-redux";
 
 class EmployeeDetails extends Component {
@@ -85,7 +77,9 @@ class EmployeeDetails extends Component {
             </Button>
           </Left>
           <Body>
-            <Title>{`Employee Details for ${employee.employeeDetails.name}`}</Title>
+            <Text
+              style={styles.title}
+            >{`Employee Details for ${employee.employeeDetails.name}`}</Text>
           </Body>
         </Header>
         <View style={styles.container}>
@@ -134,6 +128,10 @@ const styles = StyleSheet.create({
     padding: 5,
     fontSize: 15,
     flex: 1
+  },
+  title: {
+    fontSize: 18,
+    color: "white"
   }
 });
 

@@ -12,8 +12,7 @@ import {
   Left,
   Body,
   Button,
-  Icon,
-  Title
+  Icon
 } from "native-base";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import { connect } from "react-redux";
@@ -75,7 +74,7 @@ class EmployeeSubmit extends Component {
             </Button>
           </Left>
           <Body>
-            <Title>Register an Employee</Title>
+            <Text style={styles.title}>Register an Employee</Text>
           </Body>
         </Header>
         <Content contentContainerStyle={styles.container}>
@@ -173,6 +172,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 40,
     marginBottom: 10
+  },
+  title: {
+    fontSize: 18,
+    color: "white"
   }
 });
 

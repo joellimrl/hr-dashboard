@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Notifications } from "expo";
+import * as Permissions from "expo-permissions";
+import Constants from "expo-constants";
 import PropTypes from "prop-types";
 import {
   StyleSheet,
@@ -25,6 +28,41 @@ class Login extends Component {
   onPressLogin = () => {
     const { login } = this.props;
     login(this.state);
+  };
+
+  registerForPushNotificationsAsync = async () => {
+    const { postNotificationToken } = this.props;
+    if (Constants.isDevice) {
+      const { status: existingStatus } = await Permissions.getAsync(
+        Permissions.NOTIFICATIONS
+      );
+      let finalStatus = existingStatus;
+      if (existingStatus !== "granted") {
+        const { status } = await Permissions.askAsync(
+          Permissions.NOTIFICATIONS
+        );
+        finalStatus = status;
+      }
+      if (finalStatus !== "granted") {
+        alert("Failed to get push token for push notification!");
+        return;
+      }
+      let token = await Notifications.getExpoPushTokenAsync();
+      await postNotificationToken({ token });
+    } else {
+      alert("Must use physical device for Push Notifications");
+    }
+  };
+
+  componentDidMount() {
+    this.registerForPushNotificationsAsync();
+    this._notificationSubscription = Notifications.addListener(
+      this._handleNotification
+    );
+  }
+
+  _handleNotification = notification => {
+    this.setState({ notification: notification });
   };
 
   render() {
@@ -123,6 +161,11 @@ const mapDispatchToProps = dispatch => {
     login: body =>
       dispatch({
         type: "LOGIN",
+        body
+      }),
+    postNotificationToken: body =>
+      dispatch({
+        type: "POST_NOTIFICATION_TOKEN",
         body
       })
   };
