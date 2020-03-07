@@ -1,5 +1,6 @@
 import * as authController from "./controllers/auth.controller";
 import * as employeesController from "./controllers/employees.controller";
+import * as notificationController from "./controllers/notifications.controller";
 import express from "express";
 const router = express.Router();
 
@@ -18,8 +19,14 @@ router.get(
   employeesController.getEmployeeDetailsController
 );
 
-router.get("/notifications", function(req, res) {
-  res.send("publicKey");
-});
+router.post(
+  "/notifications/retrieveToken",
+  notificationController.postNotificationTokenController
+);
+
+router.put(
+  "/notifications/pushNotification",
+  notificationController.pushNotificationController
+);
 
 module.exports = router;

@@ -12,6 +12,18 @@
       "ios",
       "android",
       "web"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "com.joellim.hrdashboard",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.joellim.hrdashboard",
+      "versionCode": 1,
+      "googleServicesFile": "./google-services.json"
+    }
+  },
+  "android": {
+    "googleServicesFile": "./google-services.json"
   }
 }

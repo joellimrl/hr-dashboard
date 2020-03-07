@@ -21,6 +21,7 @@ MongoDB
     - authentication
     - employee-details
     - employee-list
+    - expo-push-tokens
 
 ## Notes
 

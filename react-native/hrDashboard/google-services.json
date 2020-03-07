@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "931567512885",
+    "firebase_url": "https://hr-dashboard-736f9.firebaseio.com",
+    "project_id": "hr-dashboard-736f9",
+    "storage_bucket": "hr-dashboard-736f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931567512885:android:7e608ba398cd06faf1b07c",
+        "android_client_info": {
+          "package_name": "com.joellim.hrdashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931567512885-03qa8uop6ob16i3rb4auko6mi3op8us6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1FiE4dsJ2xQCPCuZPLupQ0JgXj0-uRUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931567512885-03qa8uop6ob16i3rb4auko6mi3op8us6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -25,7 +25,7 @@ export async function findOne(collectionName, query) {
   return response;
 }
 
-export async function insertEmployee(collectionName, body) {
+export async function insert(collectionName, body) {
   const db = await initMongo();
   try {
     db.collection(collectionName).insertOne(body);
