@@ -1,5 +1,6 @@
 import { put, call } from "redux-saga/effects";
 import { getEmployees, getEmployeeDetails, postEmployee } from "../middleware";
+import { Toast } from "native-base";
 
 export function* getEmployeesSaga() {
   try {
@@ -37,24 +38,18 @@ export function* getEmployeeDetailsSaga(action) {
 
 export function* postEmployeeSaga(action) {
   try {
-    const { username, password } = action.body;
+    const response = yield call(postEmployee, action.body);
 
-    const publicKeyResponse = yield call(postEmployee);
-
-    if (publicKeyResponse.ok) {
-      const { data: publicKey } = publicKeyResponse;
-      const encryptedPassword = encrypt({ password, publicKey });
-
-      const response = yield call(login, {
-        username,
-        password: encryptedPassword
+    if (response.data.success) {
+      yield put({ type: "POST_EMPLOYEE_SUCCESS" });
+      Toast.show({ text: "Successfully submitted employee!", type: "success" });
+    } else {
+      Toast.show({
+        text: response.data.message,
+        type: "danger"
       });
-
-      if (response.data.success) {
-        yield put({ type: "LOGIN_SUCCESS" });
-      }
       yield put({
-        type: "LOGIN_FAIL",
+        type: "POST_EMPLOYEE_FAIL",
         message: response.data.message
       });
     }

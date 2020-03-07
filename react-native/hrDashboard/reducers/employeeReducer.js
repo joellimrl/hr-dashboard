@@ -1,5 +1,7 @@
 const initialState = {
+  success: false,
   error: false,
+  messsage: "",
   employeeList: [],
   employeeDetails: {}
 };
@@ -14,7 +16,8 @@ const employeeReducer = (state = initialState, action) => {
     case "EMPLOYEE_LIST_SUCCESS": {
       return {
         ...state,
-        employeeList: action.body
+        employeeList: action.body,
+        success: true
       };
     }
     case "EMPLOYEE_LIST_FAIL": {
@@ -33,7 +36,8 @@ const employeeReducer = (state = initialState, action) => {
     case "EMPLOYEE_DETAILS_SUCCESS": {
       return {
         ...state,
-        employeeDetails: action.body
+        employeeDetails: action.body,
+        success: true
       };
     }
     case "EMPLOYEE_DETAILS_FAIL": {
@@ -58,8 +62,17 @@ const employeeReducer = (state = initialState, action) => {
     case "POST_EMPLOYEE_FAIL": {
       return {
         ...state,
-        success: false,
+        error: true,
         message: action.message
+      };
+    }
+
+    case "RESET_EMPLOYEE_STATE": {
+      return {
+        ...state,
+        error: false,
+        message: "",
+        success: false
       };
     }
     default: {
