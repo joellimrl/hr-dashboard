@@ -10,3 +10,12 @@ export async function putLoginController(req, res) {
   const response = await authService.putLoginService(username, password);
   return res.json(response);
 }
+
+export async function postRegistrationController(req, res) {
+  const { username, password } = req.body;
+  const response = await authService.postRegistrationService(
+    username,
+    password
+  );
+  return res.json(response);
+}

@@ -8,6 +8,8 @@ router.get("/publicKey", authController.getPublicKeyController);
 
 router.put("/login", authController.putLoginController);
 
+router.post("/register", authController.postRegistrationController);
+
 router.get("/employees", employeesController.getEmployeeListController);
 
 router.post("/employee", employeesController.postEmployeeController);

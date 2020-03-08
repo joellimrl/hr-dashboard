@@ -29,7 +29,6 @@ export async function putLoginService(username, password) {
     });
     if (authDetails) {
       if (plainPassword === authDetails.password) {
-        // TODO Improve this part, either hash with md5 or something
         return { success: true };
       }
     }
@@ -40,5 +39,22 @@ export async function putLoginService(username, password) {
   return {
     success: false,
     message: "You have entered wrong credentials, please try again"
+  };
+}
+
+export async function postRegistrationService(username, password) {
+  try {
+    // const plainPassword = decryptKey(password);
+    await mongoUtils.insert("authentication", {
+      username,
+      password
+    });
+    return { success: true };
+  } catch (e) {
+    console.log(e);
+  }
+  return {
+    success: false,
+    message: "Registration failed"
   };
 }

@@ -13,6 +13,8 @@ npm install
 npm run start
 ```
 
+Hit `/register` endpoint with username and password (Temporary fix while registration is built on frontend)
+
 ### Prerequisites
 
 MongoDB
