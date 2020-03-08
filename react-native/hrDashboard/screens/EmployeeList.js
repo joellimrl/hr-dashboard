@@ -9,19 +9,17 @@ import {
 } from "react-native";
 import { Container, Header, Left, Body, Button, Right } from "native-base";
 import { connect } from "react-redux";
+import { StatusBarHeight } from "../utils/statusBar.utils";
 
 class EmployeeList extends Component {
   componentDidMount() {
     const { getEmployeeList } = this.props;
-    console.log(this.props.employee);
     getEmployeeList();
   }
 
   onPressEmployee = item => {
-    const { navigation, getEmployeeDetails, clearState } = this.props;
+    const { getEmployeeDetails } = this.props;
     getEmployeeDetails(item.id);
-    clearState();
-    navigation.navigate("employeeDetails");
   };
 
   onPressCreate = () => {
@@ -34,9 +32,8 @@ class EmployeeList extends Component {
     return (
       <View style={styles.itemView}>
         <TouchableOpacity onPress={() => this.onPressEmployee(item)}>
-          <Text style={styles.item}>{`Name: ${item.name}`}</Text>
-          <Text style={styles.item}>{`Id: ${item.id}`}</Text>
-          <Text style={styles.item}>{`Position: ${item.position}`}</Text>
+          <Text style={styles.itemName}>{`${item.name}`}</Text>
+          <Text style={styles.item}>{`#${item.id} --- ${item.position}`}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -45,7 +42,7 @@ class EmployeeList extends Component {
   render() {
     const { navigation } = this.props;
     return (
-      <Container>
+      <Container style={{ marginTop: StatusBarHeight }}>
         <Header>
           <Left></Left>
           <Body>
@@ -67,7 +64,7 @@ class EmployeeList extends Component {
             onPress={this.onPressCreate}
             style={styles.createNewEmployee}
           >
-            <Text>Register new employee</Text>
+            <Text style={styles.buttonText}>Register new employee</Text>
           </TouchableOpacity>
         </View>
       </Container>
@@ -90,16 +87,22 @@ const styles = StyleSheet.create({
   flatList: {
     width: "90%"
   },
+  itemName: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    padding: 5
+  },
   item: {
     textAlign: "center",
     fontSize: 18,
-    height: 44,
-    padding: 5,
-    backgroundColor: "#3ab678"
+    padding: 5
   },
   itemView: {
     borderWidth: 2,
-    borderColor: "#fff"
+    borderColor: "#fff",
+    backgroundColor: "#3ab678",
+    borderRadius: 10
   },
   createNewEmployee: {
     width: "80%",
@@ -113,6 +116,9 @@ const styles = StyleSheet.create({
   },
   logout: {
     fontSize: 18,
+    color: "white"
+  },
+  buttonText: {
     color: "white"
   },
   title: {

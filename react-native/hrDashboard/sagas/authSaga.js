@@ -1,6 +1,7 @@
 import { put, call } from "redux-saga/effects";
 import JSEncrypt from "jsencrypt";
 import { getPublicKey, login } from "../middleware";
+import { navigate } from "../utils/navigation.utils";
 
 function encrypt({ password, publicKey }) {
   const crypt = new JSEncrypt();
@@ -24,6 +25,7 @@ export function* loginSaga(action) {
       });
 
       if (response.data.success) {
+        navigate("employeeList");
         yield put({ type: "LOGIN_SUCCESS" });
       } else {
         yield put({

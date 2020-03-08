@@ -7,6 +7,7 @@ import LoginScreen from "./screens/Login";
 import EmployeeList from "./screens/EmployeeList";
 import EmployeeDetails from "./screens/EmployeeDetails";
 import EmployeeSubmit from "./screens/EmployeeSubmit";
+import { navigationRef } from "./utils/navigation.utils";
 import { Root } from "native-base";
 
 const Stack = createStackNavigator();
@@ -16,7 +17,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <Root>
-          <NavigationContainer>
+          <NavigationContainer ref={navigationRef}>
             <Stack.Navigator
               screenOptions={{
                 headerShown: false

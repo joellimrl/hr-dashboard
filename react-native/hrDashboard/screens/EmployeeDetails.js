@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { StyleSheet, View, Text } from "react-native";
 import { Container, Header, Left, Body, Button, Icon } from "native-base";
 import { connect } from "react-redux";
+import { StatusBarHeight } from "../utils/statusBar.utils";
 
 class EmployeeDetails extends Component {
   renderDetails = employeeDetails => {
@@ -69,7 +70,7 @@ class EmployeeDetails extends Component {
   render() {
     const { navigation, employee } = this.props;
     return (
-      <Container>
+      <Container style={{ marginTop: StatusBarHeight }}>
         <Header>
           <Left>
             <Button onPress={() => navigation.goBack()} transparent>
@@ -77,9 +78,7 @@ class EmployeeDetails extends Component {
             </Button>
           </Left>
           <Body>
-            <Text
-              style={styles.title}
-            >{`Employee Details for ${employee.employeeDetails.name}`}</Text>
+            <Text style={styles.title}>Employee Details</Text>
           </Body>
         </Header>
         <View style={styles.container}>
@@ -126,8 +125,7 @@ const styles = StyleSheet.create({
   },
   value: {
     padding: 5,
-    fontSize: 15,
-    flex: 1
+    fontSize: 15
   },
   title: {
     fontSize: 18,

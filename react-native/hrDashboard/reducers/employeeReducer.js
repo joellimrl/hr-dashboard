@@ -37,7 +37,9 @@ const employeeReducer = (state = initialState, action) => {
       return {
         ...state,
         employeeDetails: action.body,
-        success: true
+        success: true,
+        error: false,
+        message: ""
       };
     }
     case "EMPLOYEE_DETAILS_FAIL": {

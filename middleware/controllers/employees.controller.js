@@ -20,7 +20,8 @@ export async function postEmployeeController(req, res) {
 
     // Send notification to everyone that a new employee has been registered
     const message = {
-      body: "A new employee has been registered!"
+      body: "A new employee has been registered!",
+      data: { ...listBody, message: "New employee registered:" }
     };
     await pushNotificationService(message);
   } catch (e) {

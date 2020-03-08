@@ -16,20 +16,21 @@ import {
 } from "native-base";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import { connect } from "react-redux";
+import { StatusBarHeight } from "../utils/statusBar.utils";
 
 class EmployeeSubmit extends Component {
   state = {
-    name: "boink",
+    name: "",
     id: "",
-    position: "Bob",
-    startDate: "2/2/2",
+    position: "",
+    startDate: "",
     terminationDate: "",
-    department: "something",
-    dob: "2/2/2",
+    department: "",
+    dob: "",
     address: "",
-    mobileNumber: "1234",
-    email: "bla@bla.com",
-    gender: "M"
+    mobileNumber: "",
+    email: "",
+    gender: ""
   };
 
   componentDidUpdate() {
@@ -66,7 +67,7 @@ class EmployeeSubmit extends Component {
   render() {
     const { navigation } = this.props;
     return (
-      <Container>
+      <Container style={{ marginTop: StatusBarHeight }}>
         <Header>
           <Left>
             <Button onPress={() => navigation.goBack()} transparent>
@@ -77,14 +78,11 @@ class EmployeeSubmit extends Component {
             <Text style={styles.title}>Register an Employee</Text>
           </Body>
         </Header>
-        <Content contentContainerStyle={styles.container}>
-          <Form style={styles.formStyle}>
+        <Content>
+          <Form>
             <Item stackedLabel>
               <Label>Name of Employee</Label>
-              <Input
-                ref={this.searchInput}
-                onChangeText={text => this.setState({ name: text })}
-              />
+              <Input onChangeText={text => this.setState({ name: text })} />
             </Item>
             <Item stackedLabel>
               <Label>Employee ID</Label>
@@ -139,7 +137,7 @@ class EmployeeSubmit extends Component {
             onPress={this.onPressSubmit}
             style={styles.submitButton}
           >
-            <Text>SUBMIT</Text>
+            <Text style={styles.submitText}>SUBMIT</Text>
           </TouchableOpacity>
         </Content>
       </Container>
@@ -152,26 +150,19 @@ EmployeeSubmit.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 30
-  },
-  formStyle: {
-    flex: 1,
-    width: "90%"
-  },
   submitButton: {
     width: "80%",
     backgroundColor: "#fb5b5a",
     borderRadius: 25,
     height: 50,
+    alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
+    marginTop: 10,
     marginBottom: 10
+  },
+  submitText: {
+    color: "white"
   },
   title: {
     fontSize: 18,

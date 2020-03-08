@@ -1,6 +1,7 @@
 import { put, call } from "redux-saga/effects";
 import { getEmployees, getEmployeeDetails, postEmployee } from "../middleware";
 import { Toast } from "native-base";
+import { navigate } from "../utils/navigation.utils";
 
 export function* getEmployeesSaga() {
   try {
@@ -25,6 +26,7 @@ export function* getEmployeeDetailsSaga(action) {
     const response = yield call(getEmployeeDetails, employeeId);
 
     if (response.data) {
+      navigate("employeeDetails");
       yield put({ type: "EMPLOYEE_DETAILS_SUCCESS", body: response.data });
     } else {
       yield put({

@@ -12,7 +12,8 @@ const authReducer = (state = initialState, action) => {
     case "LOGIN_SUCCESS": {
       return {
         ...state,
-        success: true
+        success: true,
+        message: ""
       };
     }
     case "LOGIN_FAIL": {

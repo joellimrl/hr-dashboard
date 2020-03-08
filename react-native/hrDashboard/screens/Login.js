@@ -14,20 +14,15 @@ import {
 
 class Login extends Component {
   state = {
-    username: "admin",
-    password: "admin"
+    username: "",
+    password: "",
+    notification: {}
   };
-
-  componentDidUpdate(prevProps) {
-    const { navigation, auth } = this.props;
-    if (auth.success && auth.success !== prevProps.success) {
-      navigation.navigate("employeeList");
-    }
-  }
 
   onPressLogin = () => {
     const { login } = this.props;
     login(this.state);
+    this.setState({ notification: {} });
   };
 
   registerForPushNotificationsAsync = async () => {
@@ -62,13 +57,22 @@ class Login extends Component {
   }
 
   _handleNotification = notification => {
-    this.setState({ notification: notification });
+    this.setState({ notification });
   };
 
   render() {
+    const {
+      notification: { data }
+    } = this.state;
     return (
       <View style={styles.container}>
         <Text style={styles.logo}>HR Dashboard</Text>
+        {!!data && (
+          <View style={styles.notif}>
+            <Text style={styles.notifTitle}>{data.message}</Text>
+            <Text>{`${data.name} (${data.position})`}</Text>
+          </View>
+        )}
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
@@ -116,9 +120,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 60,
     color: "#fb5b5a",
-    marginBottom: 40,
+    marginBottom: 30,
     textAlign: "center"
   },
+  notif: {
+    padding: 10,
+    marginBottom: 20,
+    width: "80%",
+    backgroundColor: "#fffeae",
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  notifTitle: { fontWeight: "bold" },
   inputText: {
     height: 50,
     color: "white"
